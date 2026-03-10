@@ -21,3 +21,8 @@ echo "$IP ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/devops-key.pem
 echo "Running Ansible"
 
 ansible-playbook -i ansible/inventory.ini ansible/install_app.yml
+
+# Step 4 — FastAPI Application
+
+# Install dependencies
+pip install fastapi uvicorn prometheus-client
