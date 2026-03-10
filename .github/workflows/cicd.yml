@@ -1,0 +1,26 @@
+name: DevOps Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: checkout
+      uses: actions/checkout@v3
+
+    - name: build docker image
+      run: docker build -t fastapi-app .
+
+    - name: push image
+      run: |
+        docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
+        docker tag fastapi-app yourdockerhub/fastapi-app:latest
+        docker push yourdockerhub/fastapi-app:latest
